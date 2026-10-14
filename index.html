@@ -302,5 +302,140 @@
 
     calculate();
   </script>
+
+<style>
+  #cp-payment-gate {
+    max-width: 520px;
+    margin: 24px auto;
+    padding: 20px;
+    border: 1px solid #d9d9d9;
+    border-radius: 16px;
+    background: #fff;
+    color: #222;
+    font-family: inherit;
+  }
+  #cp-payment-gate h2 { margin-top: 0; }
+  #cp-payment-gate input,
+  #cp-payment-gate button {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  #cp-payment-gate button {
+    border: 0;
+    background: #176b43;
+    color: white;
+    font-weight: bold;
+  }
+  #cp-qr-placeholder {
+    margin: 16px 0;
+    padding: 28px 12px;
+    border: 2px dashed #aaa;
+    border-radius: 12px;
+    text-align: center;
+    color: #666;
+  }
+  #cp-slip-status { margin-top: 12px; }
+</style>
+
+<div id="cp-payment-gate">
+  <h2>ปลดล็อกรายงานวิเคราะห์กำไร</h2>
+  <p>ชำระเงินครั้งเดียว <strong>59 บาท</strong> เพื่อดูรายงานฉบับเต็ม</p>
+
+  <div id="cp-qr-placeholder">
+    <strong>QR PromptPay</strong>
+    <p>ต้องใส่รูป QR รับเงินจริงของคุณในส่วนนี้</p>
+  </div>
+
+  <form id="cp-slip-form">
+    <label for="cp-slip-file">อัปโหลดสลิปหลังโอนเงิน</label>
+    <input id="cp-slip-file" type="file"
+      accept="image/*" required>
+    <button id="cp-verify-button" type="submit">
+      ตรวจสอบสลิปและปลดล็อก
+    </button>
+    <p id="cp-slip-status" role="status"></p>
+  </form>
+</div>
+
+<script>
+(function () {
+  const gate = document.getElementById('cp-payment-gate');
+  const form = document.getElementById('cp-slip-form');
+  const status = document.getElementById('cp-slip-status');
+  const button = document.getElementById('cp-verify-button');
+  const storageKey = 'checkProfitReportUnlocked';
+
+  // ซ่อนรายงานฉบับเต็มไว้ก่อน
+  function setReportVisible(visible) {
+    document.querySelectorAll(
+      '.report-title, .report-subtitle, .report-card'
+    ).forEach(function (element) {
+      element.style.display = visible ? '' : 'none';
+    });
+    gate.style.display = visible ? 'none' : 'block';
+  }
+
+  function isUnlocked() {
+    try {
+      return localStorage.getItem(storageKey) === 'true';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  setReportVisible(isUnlocked());
+
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const fileInput = document.getElementById('cp-slip-file');
+    if (!fileInput.files || !fileInput.files[0]) {
+      status.textContent = 'กรุณาเลือกรูปสลิปก่อน';
+      return;
+    }
+
+    const data = new FormData();
+    data.append('files', fileInput.files[0]);
+    data.append('amount', '59');
+
+    button.disabled = true;
+    status.textContent = 'กำลังตรวจสอบสลิป กรุณารอสักครู่';
+
+    try {
+      const response = await fetch(
+        '/.netlify/functions/verify-slip',
+        { method: 'POST', body: data }
+      );
+
+      const result = await response.json();
+
+      if (response.ok && result.success === true) {
+        try {
+          localStorage.setItem(storageKey, 'true');
+        } catch (error) {
+          status.textContent =
+            'ตรวจสอบผ่าน แต่บันทึกสิทธิ์ในอุปกรณ์นี้ไม่ได้';
+          return;
+        }
+
+        status.textContent = 'ตรวจสอบผ่าน กำลังปลดล็อกรายงาน';
+        setReportVisible(true);
+      } else {
+        status.textContent =
+          result.message || 'ตรวจสอบไม่ผ่าน กรุณาตรวจสอบสลิปอีกครั้ง';
+      }
+    } catch (error) {
+      status.textContent =
+        'เชื่อมต่อเพื่อตรวจสอบไม่ได้ กรุณาลองใหม่';
+    } finally {
+      button.disabled = false;
+    }
+  });
+})();
+</script>
 </body>
 </html>
