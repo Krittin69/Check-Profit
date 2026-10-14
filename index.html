@@ -250,7 +250,7 @@
       updateReport({ cost, pack, feeRate, price });
     }
 
-    function updateReport({ cost, pack, feeRate, price }) {
+    function updateReport({ cost, pack, price }) {
       const fixed = Math.max(0, Number(el("fixedCosts").value) || 0);
       const daily = Math.max(0, Number(el("dailySales").value) || 0);
       const target = Math.min(90, Math.max(0, Number(el("targetMargin").value) || 0));
