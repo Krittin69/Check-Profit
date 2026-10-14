@@ -39,9 +39,13 @@
       font-size: 12px;
     }
     main { max-width: 560px; margin: auto; padding: 20px 16px 35px; }
-    .section-title { font-size: 18px; font-weight: 800; margin: 3px 0 5px; }
-    .hint { font-size: 13px; color: var(--muted); margin-bottom: 17px; }
-    .card {
+    .section-title, .report-title {
+      font-size: 18px; font-weight: 800; margin: 3px 0 5px;
+    }
+    .hint, .report-subtitle {
+      font-size: 13px; color: var(--muted); margin-bottom: 17px; line-height: 1.7;
+    }
+    .card, .report-card {
       background: white;
       border: 1px solid var(--line);
       border-radius: 18px;
@@ -76,20 +80,27 @@
     .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .stat { background: #FFFFFF12; padding: 12px; border-radius: 11px; }
     .stat small { display: block; color: #D6E0EA; font-size: 12px; }
-    .stat strong { display: block; font-size: 18px; margin-top: 4px; }
+    .stat strong { display: block; font-size: 18px; margin-top: 4px; overflow-wrap: anywhere; }
     .positive { color: #79E7C8; }
     .negative { color: #FFB7A8; }
     .bar { height: 7px; background: #FFFFFF25; border-radius: 10px; overflow: hidden; margin-top: 16px; }
     .bar-fill { height: 100%; width: 0; background: var(--mint); transition: width .2s; }
-    .note { font-size: 12px; line-height: 1.7; color: var(--muted); margin: 14px 2px; }
+    .report-title { margin-top: 27px; }
+    .report-results { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+    .report-item { background: #F4F8F7; padding: 13px; border-radius: 12px; min-width: 0; }
+    .report-item small { display: block; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .report-item strong { display: block; font-size: 18px; margin-top: 5px; overflow-wrap: anywhere; }
+    .report-highlight { background: #E7F8F2; border: 1px solid #B8EBDD; padding: 13px; border-radius: 12px; font-size: 13px; line-height: 1.8; margin-top: 13px; }
+    .note { font-size: 12px; line-height: 1.8; color: var(--muted); margin: 14px 2px; }
     .reset {
       border: 1px solid var(--line); background: white; color: var(--navy);
       border-radius: 10px; padding: 11px 15px; font-size: 14px; font-weight: 700;
     }
-    footer { text-align: center; color: #8A96A3; font-size: 12px; padding: 12px; }
+    footer { text-align: center; color: #8A96A3; font-size: 12px; padding: 18px 12px; }
     @media (max-width: 360px) {
       .grid { grid-template-columns: 1fr; gap: 0; }
       .profit { font-size: 31px; }
+      .report-item strong { font-size: 16px; }
     }
   </style>
 </head>
@@ -133,40 +144,76 @@
       <div class="result-label" id="resultName">กำไรจากเมนูข้าวกะเพราไก่</div>
       <div class="profit" id="profit">฿25.30</div>
       <div class="stats">
-        <div class="stat">
-          <small>กำไรต่อจาน</small>
-          <strong id="profitShort">25.30 บาท</strong>
-        </div>
-        <div class="stat">
-          <small>อัตรากำไร</small>
-          <strong id="margin">32.0%</strong>
-        </div>
-        <div class="stat">
-          <small>ค่าธรรมเนียม</small>
-          <strong id="feeAmount">23.70 บาท</strong>
-        </div>
-        <div class="stat">
-          <small>ต้นทุนรวม</small>
-          <strong id="totalCost">53.70 บาท</strong>
-        </div>
+        <div class="stat"><small>กำไรต่อจาน</small><strong id="profitShort">25.30 บาท</strong></div>
+        <div class="stat"><small>อัตรากำไร</small><strong id="margin">32.0%</strong></div>
+        <div class="stat"><small>ค่าธรรมเนียม</small><strong id="feeAmount">23.70 บาท</strong></div>
+        <div class="stat"><small>ต้นทุนรวม</small><strong id="totalCost">53.70 บาท</strong></div>
       </div>
       <div class="bar"><div class="bar-fill" id="barFill"></div></div>
       <div id="advice" style="font-size:13px;margin-top:13px">กำลังคำนวณ...</div>
     </section>
 
+    <div class="report-title">รายงานวิเคราะห์กำไร</div>
+    <div class="report-subtitle">
+      ดูราคาขายแนะนำ จุดคุ้มทุน และประมาณการกำไรต่อเดือนจากข้อมูลร้านของคุณ
+    </div>
+
+    <section class="report-card">
+      <div class="field">
+        <label for="fixedCosts">ค่าใช้จ่ายประจำต่อเดือน (บาท)</label>
+        <input id="fixedCosts" type="number" min="0" step="1" value="15000">
+      </div>
+      <div class="grid">
+        <div class="field">
+          <label for="dailySales">ยอดขายเฉลี่ย (จาน/แก้วต่อวัน)</label>
+          <input id="dailySales" type="number" min="0" step="1" value="20">
+        </div>
+        <div class="field">
+          <label for="targetMargin">อัตรากำไรเป้าหมาย (%)</label>
+          <input id="targetMargin" type="number" min="0" max="90" step="1" value="35">
+        </div>
+      </div>
+
+      <div class="report-results">
+        <div class="report-item">
+          <small>ราคาขายแนะนำตามเป้ากำไร</small>
+          <strong id="suggestedPrice">—</strong>
+        </div>
+        <div class="report-item">
+          <small>ยอดขายต่อเดือนโดยประมาณ</small>
+          <strong id="monthlySales">—</strong>
+        </div>
+        <div class="report-item">
+          <small>จำนวนขายเพื่อคุ้มทุนต่อเดือน</small>
+          <strong id="breakEven">—</strong>
+        </div>
+        <div class="report-item">
+          <small>กำไร/ขาดทุนต่อเดือนโดยประมาณ</small>
+          <strong id="monthlyNet">—</strong>
+        </div>
+      </div>
+      <div class="report-highlight" id="reportAdvice">กำลังคำนวณ...</div>
+    </section>
+
     <p class="note">
-      * คำนวณจากราคาขาย หักต้นทุนวัตถุดิบ บรรจุภัณฑ์ และค่าธรรมเนียมตามเปอร์เซ็นต์ที่กรอก
-      ยังไม่รวมค่าแรง ค่าเช่า ค่าน้ำไฟ ภาษี หรือค่าใช้จ่ายอื่น ๆ
+      * ประมาณการโดยสมมติว่าขาย 30 วันต่อเดือน ราคาขายแนะนำคำนวณจากต้นทุนวัตถุดิบ
+      บรรจุภัณฑ์ ค่าธรรมเนียม และเป้าหมายอัตรากำไร
+      ผลจริงอาจต่างออกไป รายงานนี้ยังไม่รวมภาษีและค่าใช้จ่ายที่ไม่ได้กรอก
     </p>
+
     <button class="reset" id="reset" type="button">คืนค่าเริ่มต้น</button>
     <footer>เช็กกำไรจริง · เครื่องมือช่วยตัดสินใจสำหรับร้านค้า</footer>
   </main>
 
   <script>
-    const ids = ["menu", "price", "cost", "pack", "fee"];
+    const ids = [
+      "menu", "price", "cost", "pack", "fee",
+      "fixedCosts", "dailySales", "targetMargin"
+    ];
     const el = id => document.getElementById(id);
     const money = n => n.toLocaleString("th-TH", {
-      minimumFractionDigits: 2, maximumFractionDigits: 2
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     });
 
     function calculate() {
@@ -175,19 +222,21 @@
       const cost = Math.max(0, Number(el("cost").value) || 0);
       const pack = Math.max(0, Number(el("pack").value) || 0);
       const feeRate = Math.min(100, Math.max(0, Number(el("fee").value) || 0));
+
       const fee = price * feeRate / 100;
       const total = cost + pack + fee;
       const profit = price - total;
       const margin = price > 0 ? profit / price * 100 : 0;
 
-      el("resultName").textContent = "กำไรจากเมนู" + name;
-      el("profit").textContent = (profit < 0 ? "-฿" : "฿") + money(Math.abs(profit));
+      el("resultName").textContent = "กำไรจากเมนู " + name;
+      el("profit").textContent = (profit < 0 ? "−฿" : "฿") + money(Math.abs(profit));
       el("profit").className = "profit " + (profit < 0 ? "negative" : "positive");
       el("profitShort").textContent = money(profit) + " บาท";
       el("margin").textContent = margin.toFixed(1) + "%";
       el("feeAmount").textContent = money(fee) + " บาท";
       el("totalCost").textContent = money(total) + " บาท";
       el("barFill").style.width = Math.min(100, Math.max(0, margin)) + "%";
+
       el("advice").textContent = price <= 0
         ? "กรอกราคาขายเพื่อเริ่มคำนวณ"
         : profit < 0
@@ -197,17 +246,60 @@
             : margin < 35
               ? "✓ มีกำไร แต่ควรเผื่อค่าใช้จ่ายอื่นของร้าน"
               : "✓ อัตรากำไรดี อย่าลืมคิดค่าใช้จ่ายอื่นของร้าน";
+
+      updateReport({ cost, pack, feeRate, price });
+    }
+
+    function updateReport({ cost, pack, feeRate, price }) {
+      const fixed = Math.max(0, Number(el("fixedCosts").value) || 0);
+      const daily = Math.max(0, Number(el("dailySales").value) || 0);
+      const target = Math.min(90, Math.max(0, Number(el("targetMargin").value) || 0));
+      const feeRate = Math.min(100, Math.max(0, Number(el("fee").value) || 0)) / 100;
+
+      const divisor = 1 - feeRate - target / 100;
+      const suggested = divisor > 0 ? (cost + pack) / divisor : null;
+      const contribution = price - cost - pack - price * feeRate;
+      const monthlyUnits = daily * 30;
+      const monthlySales = price * monthlyUnits;
+      const monthlyNet = contribution * monthlyUnits - fixed;
+      const breakEven = contribution > 0 ? Math.ceil(fixed / contribution) : null;
+
+      el("suggestedPrice").textContent =
+        suggested !== null && Number.isFinite(suggested)
+          ? money(suggested) + " บาท"
+          : "คำนวณไม่ได้";
+
+      el("monthlySales").textContent = money(monthlySales) + " บาท";
+      el("breakEven").textContent = breakEven !== null
+        ? breakEven.toLocaleString("th-TH") + " หน่วย"
+        : "ยังคุ้มทุนไม่ได้";
+
+      el("monthlyNet").textContent =
+        (monthlyNet < 0 ? "−" : "") + money(Math.abs(monthlyNet)) + " บาท";
+      el("monthlyNet").style.color = monthlyNet < 0 ? "#B42318" : "#087F5B";
+
+      el("reportAdvice").textContent = contribution <= 0
+        ? "⚠️ ราคาปัจจุบันไม่เหลือเงินส่วนต่างต่อหน่วยสำหรับจ่ายค่าใช้จ่ายประจำ ควรปรับราคาหรือลดต้นทุนก่อน"
+        : monthlyNet < 0
+          ? "⚠️ จากยอดขายที่กรอก คาดว่ายังไม่ครอบคลุมค่าใช้จ่ายประจำ ลองเพิ่มยอดขาย ลดต้นทุน หรือปรับราคา"
+          : "✓ จากข้อมูลที่กรอก คาดว่าจะเหลือเงินหลังหักค่าใช้จ่ายประจำประมาณ " +
+            money(monthlyNet) + " บาทต่อเดือน ก่อนภาษีและค่าใช้จ่ายอื่นที่ยังไม่ได้กรอก";
     }
 
     ids.forEach(id => el(id).addEventListener("input", calculate));
+
     el("reset").addEventListener("click", () => {
       el("menu").value = "ข้าวกะเพราไก่";
       el("price").value = 79;
       el("cost").value = 25;
       el("pack").value = 5;
       el("fee").value = 30;
+      el("fixedCosts").value = 15000;
+      el("dailySales").value = 20;
+      el("targetMargin").value = 35;
       calculate();
     });
+
     calculate();
   </script>
 </body>
