@@ -339,8 +339,81 @@
     color: #666;
   }
   #cp-slip-status { margin-top: 12px; }
-</style>
+  #cp-prepay-info {
+    max-width: 520px;
+    margin: 24px auto;
+    padding: 20px;
+    border: 1px solid #DCE8E3;
+    border-radius: 16px;
+    background: #FFFFFF;
+    color: #142B45;
+    font-family: inherit;
+    line-height: 1.8;
+  }
+  #cp-prepay-info h2 {
+    margin-top: 0;
+    font-size: 22px;
+  }
+  #cp-prepay-info ul {
+    padding-left: 22px;
+  }
+  #cp-prepay-info li {
+    margin-bottom: 9px;
+  }
+  #cp-prepay-info .cp-price {
+    background: #E7F8F2;
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    margin: 16px 0;
+  }
+  #cp-prepay-info button,
+  #cp-back-info {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border-radius: 9px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  #cp-prepay-info button {
+    border: 0;
+    background: #176B43;
+    color: white;
+  }
+  #cp-back-info {
+    border: 1px solid #DCE3E8;
+    background: white;
+    color: #142B45;
+  }</style>
+<div id="cp-prepay-info">
+  <h2>รู้กำไรจริง ก่อนตัดสินใจขาย</h2>
+  <p>
+    ปลดล็อกรายงานวิเคราะห์กำไร เพื่อช่วยให้คุณวางแผนราคา
+    และมองเห็นภาพรวมของร้านได้ชัดเจนขึ้น
+  </p>
 
+  <ul>
+    <li>วิเคราะห์กำไรและอัตรากำไรต่อเมนู</li>
+    <li>คำนวณราคาขายแนะนำตามเป้าหมายกำไร</li>
+    <li>ประมาณการยอดขายและกำไรต่อเดือน</li>
+    <li>คำนวณจำนวนที่ต้องขายเพื่อให้คุ้มทุน</li>
+    <li>รับคำแนะนำจากตัวเลขที่คุณกรอก</li>
+  </ul>
+
+  <div class="cp-price">
+    <div>ชำระครั้งเดียว</div>
+    <strong style="font-size:30px">59 บาท</strong>
+    <div style="font-size:13px">
+      รายงานเป็นการประมาณการตามข้อมูลที่กรอก
+    </div>
+  </div>
+
+  <button id="cp-show-payment" type="button">
+    ดูวิธีชำระเงิน 59 บาท
+  </button>
+</div>
 <div id="cp-payment-gate">
   <h2>ปลดล็อกรายงานวิเคราะห์กำไร</h2>
   <p>ชำระเงินครั้งเดียว <strong>59 บาท</strong> เพื่อดูรายงานฉบับเต็ม</p>
@@ -362,7 +435,11 @@
       ตรวจสอบสลิปและปลดล็อก
     </button>
     <p id="cp-slip-status" role="status"></p>
-  </form>
+    </form>
+
+  <button id="cp-back-info" type="button">
+    ← กลับไปดูสิ่งที่จะได้รับ
+  </button>
 </div>
 
 <script>
@@ -374,14 +451,32 @@
   const storageKey = 'checkProfitReportUnlocked';
 
   // ซ่อนรายงานฉบับเต็มไว้ก่อน
+    const intro = document.getElementById('cp-prepay-info');
+  const showPaymentButton = document.getElementById('cp-show-payment');
+  const backInfoButton = document.getElementById('cp-back-info');
+
   function setReportVisible(visible) {
     document.querySelectorAll(
       '.report-title, .report-subtitle, .report-card'
     ).forEach(function (element) {
       element.style.display = visible ? '' : 'none';
     });
-    gate.style.display = visible ? 'none' : 'block';
+
+    intro.style.display = visible ? 'none' : 'block';
+    gate.style.display = 'none';
   }
+
+  showPaymentButton.addEventListener('click', function () {
+    intro.style.display = 'none';
+    gate.style.display = 'block';
+    gate.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  backInfoButton.addEventListener('click', function () {
+    gate.style.display = 'none';
+    intro.style.display = 'block';
+    intro.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
   function isUnlocked() {
     try {
