@@ -105,6 +105,7 @@
   </style>
 </head>
 <body>
+  <div id="cp-home-page">
   <header>
     <div class="brand">เช็กกำไร<span>จริง</span></div>
     <div class="subtitle">รู้กำไรก่อนตั้งราคาและจัดโปร</div>
@@ -573,7 +574,7 @@
   });
 })();
 </script>
-
+</div>
 <style>
   #cp-product-page { display:none; max-width:560px; margin:auto; padding:20px 16px 100px; color:var(--navy); }
   #cp-product-page .cpp-card { background:white; border:1px solid var(--line); border-radius:18px; padding:18px; margin-bottom:15px; }
@@ -677,12 +678,10 @@
   const homeBtn = document.getElementById('cpp-home-btn');
   const productBtn = document.getElementById('cpp-product-btn');
   const modal = document.getElementById('cpp-help-modal');
-  const originalHeader = document.querySelector('body > header');
-  const originalMain = document.querySelector('body > main');
+  const homePage = document.getElementById('cp-home-page');
 
   function showPage(product) {
-    if (originalHeader) originalHeader.style.display = product ? 'none' : '';
-    if (originalMain) originalMain.style.display = product ? 'none' : '';
+    if (homePage) homePage.style.display = product ? 'none' : 'block';
     page.style.display = product ? 'block' : 'none';
     homeBtn.classList.toggle('active', !product);
     productBtn.classList.toggle('active', product);
