@@ -801,7 +801,41 @@
   color: var(--muted);
   text-align: center;
   line-height: 1.8;
-}</style>
+}
+/* เมนูด้านบน Check Profit */
+#cp-product-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 16px 0;
+  padding: 6px;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+#cp-product-nav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 10px 6px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+#cp-product-nav button.active {
+  background: var(--navy);
+  color: #FFFFFF;
+}
+#cp-product-nav .cp-nav-icon {
+  font-size: 19px;
+  line-height: 1;
+}</style> 
 
 <section id="cp-product-page">
     <div id="cpp-entry-view">
@@ -908,8 +942,14 @@
 </section>
 
 <nav id="cp-product-nav" aria-label="เมนูหลัก">
-  <button id="cpp-home-btn" class="active" type="button">คำนวณกำไรเดิม</button>
-  <button id="cpp-product-btn" type="button">วิเคราะห์สินค้า</button>
+  <button id="cpp-home-btn" class="active" type="button">
+    <span class="cp-nav-icon">▦</span>
+    <span>คำนวณกำไร</span>
+  </button>
+  <button id="cpp-product-btn" type="button">
+    <span class="cp-nav-icon">▥</span>
+    <span>วิเคราะห์สินค้า</span>
+  </button>
 </nav>
 
 <div id="cpp-help-modal" role="dialog" aria-modal="true" aria-label="คำอธิบาย">
