@@ -594,7 +594,214 @@
   #cpp-help-modal { display:none; position:fixed; z-index:10000; inset:0; background:#142B4577; padding:20px; align-items:center; justify-content:center; }
   #cpp-help-modal .cpp-modal-card { background:white; border-radius:16px; padding:20px; max-width:400px; width:100%; line-height:1.8; }
   #cpp-help-close { width:100%; border:0; border-radius:9px; padding:12px; margin-top:15px; background:var(--navy); color:white; font-weight:bold; }
-</style>
+  
+#cp-product-page .cpp-primary {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 14px;
+  background: var(--mint);
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+#cp-product-page .cpp-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+#cp-product-page .cpp-summary-card,
+#cp-product-page .cpp-history-item {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  min-width: 0;
+}
+
+#cp-product-page .cpp-summary-card small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+#cp-product-page .cpp-summary-card strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+
+#cp-product-page .cpp-history-item {
+  margin: 12px 0;
+}
+
+#cp-product-page .cpp-bar-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  margin: 8px 0 4px;
+}
+
+#cp-product-page .cpp-bar-track {
+  height: 12px;
+  background: var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+#cp-product-page .cpp-bar {
+  height: 100%;
+  border-radius: 99px;
+}
+
+#cp-product-page .cpp-bar-cost {
+  background: var(--navy);
+}
+
+#cp-product-page .cpp-bar-profit {
+  background: var(--mint);
+}
+
+#cp-product-page .cpp-delete {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: white;
+  color: var(--navy);
+  padding: 9px 12px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+#cp-product-page .cpp-empty {
+  background: white;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+  color: var(--muted);
+}
+
+#cp-product-page .cpp-primary {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 14px;
+  background: var(--mint);
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 800;
+  margin-top: 16px;
+}
+
+#cpp-graph-view {
+  display: none;
+}
+
+#cpp-graph-view .cpp-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+#cpp-graph-view .cpp-summary-card,
+#cpp-graph-list .cpp-history-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+#cpp-graph-view .cpp-summary-card small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+#cpp-graph-view .cpp-summary-card strong {
+  display: block;
+  color: var(--navy);
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+#cpp-graph-list .cpp-history-card {
+  margin-bottom: 12px;
+}
+
+#cpp-graph-list .cpp-history-head,
+#cpp-graph-list .cpp-bar-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+#cpp-graph-list .cpp-history-name {
+  font-weight: 800;
+  color: var(--navy);
+  overflow-wrap: anywhere;
+}
+
+#cpp-graph-list .cpp-delete {
+  color: #B42318;
+  background: #FFF7F6;
+  border: 1px solid #F2C7C3;
+  border-radius: 9px;
+  padding: 8px 10px;
+  font-weight: 700;
+}
+
+#cpp-graph-list .cpp-bar-label {
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+#cpp-graph-list .cpp-track {
+  height: 9px;
+  background: #E9EEF2;
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+#cpp-graph-list .cpp-fill-cost {
+  height: 100%;
+  background: var(--navy);
+}
+
+#cpp-graph-list .cpp-fill-profit {
+  height: 100%;
+  background: var(--mint);
+}
+
+#cpp-graph-list .cpp-fill-loss {
+  height: 100%;
+  background: #D94841;
+}
+
+#cpp-graph-list .cpp-history-meta {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 10px;
+  line-height: 1.7;
+}
+
+#cpp-graph-empty {
+  background: white;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  padding: 24px 16px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.8;
+}</style>
 
 <section id="cp-product-page">
   <div class="section-title">วิเคราะห์สินค้า</div>
@@ -654,8 +861,48 @@
     <div id="cpp-advice" style="font-size:13px;line-height:1.8;margin-top:14px"></div>
   </div>
 
+
   <div class="cpp-note">
-    <strong>หมายเหตุสำคัญ:</strong> เงินเหลือนี้หักเฉพาะวัตถุดิบ บรรจุภัณฑ์ และค่าธรรมเนียมที่คุณกรอกเท่านั้น ยังไม่หักค่าเช่า เงินเดือน ค่าน้ำไฟ ภาษี ของเสีย หรือค่าใช้จ่ายอื่น จึงไม่ใช่กำไรสุทธิของทั้งร้าน
+    <strong>หมายเหตุสำคัญ:</strong>
+    กำไรต่อชิ้นคำนวณจากราคาขายหักวัตถุดิบ
+    บรรจุภัณฑ์ และค่าธรรมเนียมที่กรอกเท่านั้น
+    ยังไม่หักค่าเช่า เงินเดือน ค่าน้ำไฟ ภาษี
+    ของเสีย หรือค่าใช้จ่ายอื่น จึงไม่ใช่กำไรสุทธิของทั้งร้าน
+  </div>
+
+  <button id="cpp-save-and-graph"
+          class="cpp-primary"
+          type="button">
+    คำนวณและดูกราฟ
+  </button>
+  </div>
+
+  <div id="cpp-graph-view" style="display:none">
+    <div class="section-title">กราฟและประวัติสินค้า</div>
+
+    <div class="hint">
+      เปรียบเทียบต้นทุนรวมกับกำไรต่อชิ้นของสินค้าที่บันทึกไว้
+    </div>
+
+    <div class="cpp-summary">
+      <div class="cpp-summary-card">
+        <small>จำนวนเมนู</small>
+        <strong id="cpp-summary-count">0 รายการ</strong>
+      </div>
+
+      <div class="cpp-summary-card">
+        <small>กำไรต่อชิ้นเฉลี่ย</small>
+        <strong id="cpp-summary-profit">฿0.00</strong>
+      </div>
+    </div>
+
+    <div id="cpp-graph-list"></div>
+
+    <button id="cpp-add-another"
+            class="cpp-primary"
+            type="button">
+      + เพิ่มสินค้าใหม่
+    </button>
   </div>
 </section>
 
@@ -672,6 +919,7 @@
   </div>
 </div>
 
+
 <script>
 (function () {
   const page = document.getElementById('cp-product-page');
@@ -679,6 +927,9 @@
   const productBtn = document.getElementById('cpp-product-btn');
   const modal = document.getElementById('cpp-help-modal');
   const homePage = document.getElementById('cp-home-page');
+  const entry = document.getElementById('cpp-entry-view');
+  const graph = document.getElementById('cpp-graph-view');
+  const historyKey = 'checkProfitProductHistory_v1';
 
   function showPage(product) {
     if (homePage) homePage.style.display = product ? 'none' : 'block';
@@ -688,61 +939,269 @@
     window.scrollTo(0, 0);
   }
 
-  homeBtn.addEventListener('click', function () { showPage(false); });
-  productBtn.addEventListener('click', function () { showPage(true); });
-
-  document.querySelectorAll('#cp-product-page [data-help]').forEach(function (button) {
-    button.addEventListener('click', function () {
-      document.getElementById('cpp-help-text').textContent = button.dataset.help;
-      modal.style.display = 'flex';
-    });
+  homeBtn.addEventListener('click', function () {
+    showPage(false);
   });
+
+  productBtn.addEventListener('click', function () {
+    showPage(true);
+  });
+
+  document.querySelectorAll('#cp-product-page [data-help]')
+    .forEach(function (button) {
+      button.addEventListener('click', function () {
+        document.getElementById('cpp-help-text').textContent =
+          button.dataset.help;
+        modal.style.display = 'flex';
+      });
+    });
 
   document.getElementById('cpp-help-close').addEventListener('click', function () {
     modal.style.display = 'none';
   });
+
   modal.addEventListener('click', function (event) {
     if (event.target === modal) modal.style.display = 'none';
   });
 
-  const fmt = function (n) {
-    return n.toLocaleString('th-TH', {minimumFractionDigits:2, maximumFractionDigits:2});
-  };
+  function fmt(n) {
+    return Number(n).toLocaleString('th-TH', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
 
-  function calculateProduct() {
-    const name = document.getElementById('cpp-name').value.trim() || 'สินค้าของคุณ';
-    const price = Math.max(0, Number(document.getElementById('cpp-price').value) || 0);
-    const raw = Math.max(0, Number(document.getElementById('cpp-raw').value) || 0);
-    const pack = Math.max(0, Number(document.getElementById('cpp-pack').value) || 0);
-    const feeValue = Math.max(0, Number(document.getElementById('cpp-fee').value) || 0);
+  function getProductData() {
+    const name =
+      document.getElementById('cpp-name').value.trim() || 'สินค้าของคุณ';
+
+    const price = Math.max(0, Number(
+      document.getElementById('cpp-price').value
+    ) || 0);
+
+    const raw = Math.max(0, Number(
+      document.getElementById('cpp-raw').value
+    ) || 0);
+
+    const pack = Math.max(0, Number(
+      document.getElementById('cpp-pack').value
+    ) || 0);
+
+    const feeValue = Math.max(0, Number(
+      document.getElementById('cpp-fee').value
+    ) || 0);
+
     const type = document.getElementById('cpp-fee-type').value;
     const fee = type === 'percent' ? price * feeValue / 100 : feeValue;
     const total = raw + pack + fee;
-    const remaining = price - total;
-    const margin = price > 0 ? remaining / price * 100 : 0;
+    const profit = price - total;
 
-    document.getElementById('cpp-fee-label').textContent =
-      type === 'percent' ? 'ค่าธรรมเนียม (%)' : 'ค่าธรรมเนียม (บาทต่อชิ้น)';
-    document.getElementById('cpp-result-name').textContent = 'เงินเหลือจาก ' + name;
-    document.getElementById('cpp-remaining').textContent =
-      (remaining < 0 ? '−฿' : '฿') + fmt(Math.abs(remaining));
-    document.getElementById('cpp-remaining').style.color =
-      remaining < 0 ? '#FFB7A8' : '#79E7C8';
-    document.getElementById('cpp-total').textContent = fmt(total) + ' บาท';
-    document.getElementById('cpp-margin').textContent = margin.toFixed(1) + '%';
-    document.getElementById('cpp-fee-result').textContent = fmt(fee) + ' บาท';
-    document.getElementById('cpp-advice').textContent = price <= 0
-      ? 'กรอกราคาขายเพื่อเริ่มคำนวณ'
-      : remaining < 0
-        ? '⚠️ ต้นทุนที่กรอกสูงกว่าราคาขาย สินค้านี้ติดลบก่อนหักค่าใช้จ่ายอื่น'
-        : 'เงินเหลือ ' + fmt(remaining) + ' บาทต่อชิ้น ก่อนหักค่าใช้จ่ายอื่นของร้าน';
+    return {
+      id: Date.now().toString() + Math.random().toString(36).slice(2),
+      name: name,
+      price: price,
+      raw: raw,
+      pack: pack,
+      fee: fee,
+      total: total,
+      profit: profit,
+      margin: price > 0 ? profit / price * 100 : 0
+    };
   }
 
-  ['cpp-name','cpp-price','cpp-raw','cpp-pack','cpp-fee','cpp-fee-type'].forEach(function (id) {
-    document.getElementById(id).addEventListener('input', calculateProduct);
-    document.getElementById(id).addEventListener('change', calculateProduct);
-  });
+  function calculateProduct() {
+    const item = getProductData();
+    const type = document.getElementById('cpp-fee-type').value;
+
+    document.getElementById('cpp-fee-label').textContent =
+      type === 'percent'
+        ? 'ค่าธรรมเนียม (%)'
+        : 'ค่าธรรมเนียม (บาทต่อชิ้น)';
+
+    document.getElementById('cpp-result-name').textContent =
+      'กำไรต่อชิ้นจาก ' + item.name;
+
+    document.getElementById('cpp-remaining').textContent =
+      (item.profit < 0 ? '−฿' : '฿') + fmt(Math.abs(item.profit));
+
+    document.getElementById('cpp-remaining').style.color =
+      item.profit < 0 ? '#FFB7A8' : '#79E7C8';
+
+    document.getElementById('cpp-total').textContent =
+      fmt(item.total) + ' บาท';
+
+    document.getElementById('cpp-margin').textContent =
+      item.margin.toFixed(1) + '%';
+
+    document.getElementById('cpp-fee-result').textContent =
+      fmt(item.fee) + ' บาท';
+
+    document.getElementById('cpp-advice').textContent =
+      item.price <= 0
+        ? 'กรอกราคาขายเพื่อเริ่มคำนวณ'
+        : item.profit < 0
+          ? '⚠️ ต้นทุนที่กรอกสูงกว่าราคาขาย สินค้านี้ติดลบก่อนหักค่าใช้จ่ายอื่น'
+          : 'กำไรต่อชิ้น ' + fmt(item.profit) +
+            ' บาท ก่อนหักค่าใช้จ่ายอื่นของร้าน';
+  }
+
+  function readHistory() {
+    try {
+      const items = JSON.parse(localStorage.getItem(historyKey) || '[]');
+      return Array.isArray(items) ? items : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function writeHistory(items) {
+    try {
+      localStorage.setItem(historyKey, JSON.stringify(items));
+      return true;
+    } catch (error) {
+      alert('บันทึกประวัติไม่ได้ กรุณาตรวจสอบพื้นที่จัดเก็บของ Safari');
+      return false;
+    }
+  }
+
+  function renderHistory() {
+    const items = readHistory();
+    const list = document.getElementById('cpp-graph-list');
+
+    document.getElementById('cpp-summary-count').textContent =
+      items.length + ' รายการ';
+
+    const average = items.length
+      ? items.reduce(function (sum, item) {
+          return sum + Number(item.profit || 0);
+        }, 0) / items.length
+      : 0;
+
+    document.getElementById('cpp-summary-profit').textContent =
+      (average < 0 ? '−฿' : '฿') + fmt(Math.abs(average));
+
+    list.textContent = '';
+
+    if (!items.length) {
+      const empty = document.createElement('div');
+      empty.className = 'cpp-empty';
+      empty.textContent = 'ยังไม่มีประวัติสินค้า';
+      list.appendChild(empty);
+      return;
+    }
+
+    items.forEach(function (item) {
+      const card = document.createElement('div');
+      card.className = 'cpp-history-item';
+
+      const title = document.createElement('strong');
+      title.textContent = item.name;
+      card.appendChild(title);
+
+      const maxValue = Math.max(
+        Number(item.total) || 0,
+        Math.abs(Number(item.profit) || 0),
+        1
+      );
+
+      [
+        ['ต้นทุนรวม', Number(item.total) || 0, 'cpp-bar-cost'],
+        ['กำไรต่อชิ้น', Number(item.profit) || 0, 'cpp-bar-profit']
+      ].forEach(function (row) {
+        const label = document.createElement('div');
+        label.className = 'cpp-bar-label';
+
+        const labelText = document.createElement('span');
+        labelText.textContent = row[0];
+
+        const value = document.createElement('strong');
+        value.textContent =
+          (row[1] < 0 ? '−฿' : '฿') + fmt(Math.abs(row[1]));
+
+        label.append(labelText, value);
+        card.appendChild(label);
+
+        const track = document.createElement('div');
+        track.className = 'cpp-bar-track';
+
+        const bar = document.createElement('div');
+        bar.className = 'cpp-bar ' + row[2];
+        bar.style.width =
+          Math.min(100, Math.abs(row[1]) / maxValue * 100) + '%';
+
+        if (row[1] < 0) bar.style.background = '#D95D4F';
+
+        track.appendChild(bar);
+        card.appendChild(track);
+      });
+
+      const deleteButton = document.createElement('button');
+      deleteButton.type = 'button';
+      deleteButton.className = 'cpp-delete';
+      deleteButton.textContent = 'ลบรายการนี้';
+
+      deleteButton.addEventListener('click', function () {
+        if (!confirm('ต้องการลบประวัติ "' + item.name + '" ใช่หรือไม่?')) {
+          return;
+        }
+
+        writeHistory(readHistory().filter(function (saved) {
+          return saved.id !== item.id;
+        }));
+
+        renderHistory();
+      });
+
+      card.appendChild(deleteButton);
+      list.appendChild(card);
+    });
+  }
+
+  document.getElementById('cpp-save-and-graph')
+    .addEventListener('click', function () {
+      const item = getProductData();
+
+      if (item.price <= 0) {
+        alert('กรุณากรอกราคาขายให้มากกว่า 0 บาท');
+        return;
+      }
+
+      const items = readHistory();
+      items.unshift(item);
+
+      if (!writeHistory(items)) return;
+
+      renderHistory();
+      entry.style.display = 'none';
+      graph.style.display = 'block';
+      window.scrollTo(0, 0);
+    });
+
+  document.getElementById('cpp-add-another')
+    .addEventListener('click', function () {
+      graph.style.display = 'none';
+      entry.style.display = 'block';
+
+      ['cpp-name', 'cpp-price', 'cpp-raw', 'cpp-pack']
+        .forEach(function (id) {
+          document.getElementById(id).value = '';
+        });
+
+      document.getElementById('cpp-fee').value = '0';
+      document.getElementById('cpp-fee-type').value = 'percent';
+
+      calculateProduct();
+      window.scrollTo(0, 0);
+    });
+
+  ['cpp-name', 'cpp-price', 'cpp-raw', 'cpp-pack', 'cpp-fee', 'cpp-fee-type']
+    .forEach(function (id) {
+      document.getElementById(id).addEventListener('input', calculateProduct);
+      document.getElementById(id).addEventListener('change', calculateProduct);
+    });
+
   calculateProduct();
+  renderHistory();
 })();
 </script>
 </body>
